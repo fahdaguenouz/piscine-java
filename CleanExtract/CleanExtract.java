@@ -11,27 +11,27 @@ public class CleanExtract {
             int first = part.indexOf('.');
             int last = part.lastIndexOf('.');
 
-            String extracted = "";
+            String word = "";
 
             if (first != -1 && last != -1 && first < last) {
 
-                extracted = part.substring(first + 1, last).trim();
+                word = part.substring(first + 1, last).trim();
             } else if (first != -1) {
 
-                extracted = part.substring(first + 1).trim();
+                word = part.substring(first + 1).trim();
             } else if (last != -1) {
 
-                extracted = part.substring(0, last).trim();
+                word = part.substring(0, last).trim();
             } else {
 
-                extracted = part.trim();
+                word = part.trim();
             }
 
-            if (!extracted.isEmpty()) {
+            if (!word.isEmpty()) {
                 if (!result.isEmpty()) {
                     result += " ";
                 }
-                result += extracted;
+                result += word;
             }
         }
         return result ;
