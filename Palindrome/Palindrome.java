@@ -5,7 +5,12 @@ public class Palindrome {
             char letter = s.charAt(i);
             reverse+=letter;
         }
-        return s.equals(reverse);
+        reverse.toLowerCase();
+// System.out.println(reverse);
+// System.out.println(s);
+// System.out.println(s.toLowerCase());
+
+        return s.toLowerCase().equals(reverse.toLowerCase());
          
     }
 }
