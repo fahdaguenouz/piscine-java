@@ -1,7 +1,7 @@
 public class Palindrome {
     public static boolean isPalindrome(String s) {
         if (s==null){
-            return null;
+            return false;
         }
         String reverse="";
         for (int i=s.length()-1;i>=0;i--){
