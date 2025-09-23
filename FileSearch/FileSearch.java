@@ -21,7 +21,7 @@ public class FileSearch {
                     return found;
                 }
             } else if (file.isFile() && file.getName().equals(fileName)) {
-                return file.getPath().replace("\\", "/");
+                return file.getPath();
             }
         }
         return null;
