@@ -1,0 +1,32 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class FileManager {
+    public static void createFile(String fileName, String content) throws IOException {
+        File file = new File(fileName);
+
+        try (
+                FileWriter writ = new FileWriter(fileName)) {
+            writ.write(content);
+        }
+    }
+
+    public static String getContentFile(String fileName) throws IOException {
+        // your code here
+        Path p = Path.of(fileName);
+
+        byte[] content = Files.readAllBytes(p);
+        return content.toString();
+
+    }
+
+    public static void deleteFile(String fileName) {
+        File file = new File(fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+}
