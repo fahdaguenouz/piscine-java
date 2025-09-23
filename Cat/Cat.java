@@ -12,7 +12,7 @@ public class Cat {
             String content = Files.readString(filePath);
             System.out.println(content);
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            System.err.println( e.getMessage());
         }
     }
 }
