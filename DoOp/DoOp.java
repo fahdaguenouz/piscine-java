@@ -20,7 +20,16 @@ public class DoOp {
             res=a*b;
         break;
          case "/":
+         if(b<0){
+            return "Error";
+        }
             res=a/b;
+        break;
+        case "%":
+        if(b<0){
+            return "Error";
+        }
+            res=a%b;
         break;
         default:
         return "Error";
