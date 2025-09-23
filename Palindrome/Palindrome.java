@@ -8,7 +8,6 @@ public class Palindrome {
             char letter = s.charAt(i);
             reverse+=letter;
         }
-        reverse.toLowerCase();
 // System.out.println(reverse);
 // System.out.println(s);
 // System.out.println(s.toLowerCase());
