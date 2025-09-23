@@ -9,8 +9,8 @@ public class Cat {
         }
          Path filePath = Path.of(args[0]);
         try {
-            String content = Files.readString(filePath);
-            System.out.println(content);
+           byte[] content = Files.readAllBytes(filePath);
+            System.out.write(content);
         } catch (IOException e) {
             System.err.println( e.getMessage());
         }
