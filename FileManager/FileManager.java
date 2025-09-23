@@ -6,10 +6,8 @@ import java.nio.file.Path;
 
 public class FileManager {
     public static void createFile(String fileName, String content) throws IOException {
-        File file = new File(fileName);
-
         try (
-                FileWriter writ = new FileWriter(fileName)) {
+            FileWriter writ = new FileWriter(fileName)) {
             writ.write(content);
         }
     }
