@@ -18,8 +18,8 @@ public class FileManager {
         // your code here
         Path p = Path.of(fileName);
 
-        byte[] content = Files.readAllBytes(p);
-        return content.toString();
+        String content = Files.readString(p);
+        return content;
 
     }
 
