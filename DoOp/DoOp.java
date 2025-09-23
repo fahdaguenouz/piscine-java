@@ -1,6 +1,6 @@
 public class DoOp {
     public static String operate(String[] args) {
-        if(args.length==0 ||args.length<=3){
+        if(args.length==0 ||args.length<3){
             return "Error";
         }
        int a = Integer.parseInt(args[0]);
@@ -20,13 +20,13 @@ public class DoOp {
             res=a*b;
         break;
          case "/":
-         if(b<0){
+         if(b<=0){
             return "Error";
         }
             res=a/b;
         break;
         case "%":
-        if(b<0){
+        if(b<=0){
             return "Error";
         }
             res=a%b;

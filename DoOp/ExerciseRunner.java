@@ -3,6 +3,8 @@ public class ExerciseRunner {
         System.out.println(DoOp.operate(new String[]{"1","+","2"}));
         System.out.println(DoOp.operate(new String[]{"1","-","1"}));
         System.out.println(DoOp.operate(new String[]{"1","%","0"}));
+        System.out.println(DoOp.operate(new String[]{"1","-","1"}));
+
         System.out.println(DoOp.operate(args));
     }
 }
