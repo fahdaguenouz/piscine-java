@@ -63,6 +63,8 @@ public class CelestialObject {
     @Override
      public boolean equals(Object obj) {
         if (this == obj) return true; 
+        if (obj == null || getClass() != obj.getClass()) return false;
+
         CelestialObject other = (CelestialObject) obj;
         return Double.compare(other.x, x) == 0 &&
                Double.compare(other.y, y) == 0 &&
