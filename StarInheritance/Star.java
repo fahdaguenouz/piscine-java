@@ -5,5 +5,8 @@ public class Star extends CelestialObject{
     public double getMagnitude(){
         return magnitude;
     }
+    public void setMagnitude(double newmag){
+      this.magnitude=newmag;
+    }
 
 }
