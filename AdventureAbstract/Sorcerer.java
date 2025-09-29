@@ -17,6 +17,19 @@ public class Sorcerer extends Character implements Healer {
     }
 
     @Override
+    public void attack(Character target) {
+        heal(this);           // heal itself
+        target.takeDamage(10); // deal 10 damage
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        reduceHealth(damage); // take full damage
+    }
+
+
+
+    @Override
     public String toString() {
         if (getCurrentHealth() == 0) {
             return getName() + " is a dead sorcerer. So bad, it could heal " + healCapacity + " HP.";

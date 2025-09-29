@@ -7,17 +7,14 @@ public abstract class Character {
 
     private final String name;
 
-
     private static List<Character> allCharacters = new ArrayList<>();
-
 
     public Character(String name, int maxHealth) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
-        allCharacters.add(this); 
+        allCharacters.add(this);
     }
-
 
     public int getMaxHealth() {
         return maxHealth;
@@ -31,10 +28,9 @@ public abstract class Character {
         return name;
     }
 
-  public abstract void attack(Character target);
-    public abstract void takeDamage(int damage);
+    public abstract void attack(Character target);
 
-    
+    public abstract void takeDamage(int damage);
 
     @Override
     public String toString() {
@@ -44,13 +40,13 @@ public abstract class Character {
         return name + " : " + currentHealth + "/" + maxHealth;
     }
 
-public void receiveHealing(int amount) {
-    if (currentHealth == 0) return; 
-    currentHealth += amount;
-    if (currentHealth > maxHealth) {
-        currentHealth = maxHealth;
+    public void receiveHealing(int amount) {
+        if (currentHealth == 0)
+            return; // can't heal KO
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
     }
-}
 
     public static String printStatus() {
         StringBuilder sb = new StringBuilder();
@@ -72,11 +68,20 @@ public void receiveHealing(int amount) {
     public static Character fight(Character c1, Character c2) {
         while (c1.currentHealth > 0 && c2.currentHealth > 0) {
             c1.attack(c2);
-            if (c2.currentHealth == 0) return c1;
+            if (c2.currentHealth == 0)
+                return c1;
 
             c2.attack(c1);
-            if (c1.currentHealth == 0) return c2;
+            if (c1.currentHealth == 0)
+                return c2;
         }
-        return null; 
+        return null;
     }
+
+    public void reduceHealth(int damage) {
+        currentHealth -= damage;
+        if (currentHealth < 0)
+            currentHealth = 0;
+    }
+
 }

@@ -5,6 +5,17 @@ public class Monster extends Character {
     }
 
     @Override
+    public void attack(Character target) {
+        target.takeDamage(7);
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+        int actualDamage = (int) Math.floor(damage * 0.8);
+        reduceHealth(actualDamage);  // now works
+    }
+
+    @Override
     public String toString() {
         if (getCurrentHealth() > 0) {
             return getName() + " is a monster with " + getCurrentHealth() + " HP";
