@@ -25,6 +25,16 @@ public abstract class Character {
         return currentHealth;
     }
 
+    protected void setCurrentHealth(int currentHealth) {
+        if (currentHealth < 0) {
+            this.currentHealth = 0;
+        } else if (currentHealth > maxHealth) {
+            this.currentHealth = maxHealth;
+        } else {
+            this.currentHealth = currentHealth;
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -38,14 +48,17 @@ public abstract class Character {
     public abstract void takeDamage(int damage);
 
     protected void receiveHealing(int amount) {
-        if (currentHealth == 0) return; // can't heal KO
+        if (currentHealth == 0)
+            return; // can't heal KO
         currentHealth += amount;
-        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
     }
 
     protected void reduceHealth(int damage) {
         currentHealth -= damage;
-        if (currentHealth < 0) currentHealth = 0;
+        if (currentHealth < 0)
+            currentHealth = 0;
     }
 
     public static String printStatus() {
@@ -66,10 +79,12 @@ public abstract class Character {
     public static Character fight(Character c1, Character c2) {
         while (c1.getCurrentHealth() > 0 && c2.getCurrentHealth() > 0) {
             c1.attack(c2);
-            if (c2.getCurrentHealth() == 0) return c1;
+            if (c2.getCurrentHealth() == 0)
+                return c1;
 
             c2.attack(c1);
-            if (c1.getCurrentHealth() == 0) return c2;
+            if (c1.getCurrentHealth() == 0)
+                return c2;
         }
         return null;
     }
