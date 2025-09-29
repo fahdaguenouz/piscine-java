@@ -16,6 +16,18 @@ public abstract class Character {
         allCharacters.add(this);
     }
 
+   
+
+    public void setCurrentHealth(int currentHealth) {
+        if (currentHealth < 0) {
+            this.currentHealth = 0;
+        } else if (currentHealth > maxHealth) {
+            this.currentHealth = maxHealth;
+        } else {
+            this.currentHealth = currentHealth;
+        }
+    }
+
     public int getMaxHealth() {
         return maxHealth;
     }
@@ -42,7 +54,7 @@ public abstract class Character {
 
     public void receiveHealing(int amount) {
         if (currentHealth == 0)
-            return; // can't heal KO
+            return; 
         currentHealth += amount;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;

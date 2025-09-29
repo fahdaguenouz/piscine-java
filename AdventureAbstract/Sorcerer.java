@@ -18,13 +18,13 @@ public class Sorcerer extends Character implements Healer {
 
     @Override
     public void attack(Character target) {
-        heal(this);           // heal itself
-        target.takeDamage(10); // deal 10 damage
+        heal(this);        
+        target.takeDamage(10); 
     }
 
     @Override
     public void takeDamage(int damage) {
-        reduceHealth(damage); // take full damage
+        reduceHealth(damage);
     }
 
 

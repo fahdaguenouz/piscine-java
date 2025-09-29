@@ -12,7 +12,7 @@ public class Monster extends Character {
     @Override
     public void takeDamage(int damage) {
         int actualDamage = (int) Math.floor(damage * 0.8);
-        reduceHealth(actualDamage);  // now works
+        reduceHealth(actualDamage);  
     }
 
     @Override
