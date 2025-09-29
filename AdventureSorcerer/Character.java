@@ -3,7 +3,8 @@ import java.util.List;
 
 public class Character {
     private final int maxHealth;
-    protected int currentHealth;
+    private int currentHealth;
+
     private final String name;
 
 
@@ -50,6 +51,13 @@ public class Character {
         return name + " : " + currentHealth + "/" + maxHealth;
     }
 
+public void receiveHealing(int amount) {
+    if (currentHealth == 0) return; 
+    currentHealth += amount;
+    if (currentHealth > maxHealth) {
+        currentHealth = maxHealth;
+    }
+}
 
     public static String printStatus() {
         StringBuilder sb = new StringBuilder();
