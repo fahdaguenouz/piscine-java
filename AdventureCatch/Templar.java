@@ -15,6 +15,9 @@ public class Templar extends Character implements Healer, Tank {
 
     @Override
     public void heal(Character target) throws DeadCharacterException {
+        if (getCurrentHealth() == 0) {
+            throw new DeadCharacterException(this);
+        }
         target.receiveHealing(healCapacity);
     }
 
@@ -33,14 +36,17 @@ public class Templar extends Character implements Healer, Tank {
     @Override
     public void takeDamage(int damage) throws DeadCharacterException {
         int actualDamage = damage - shield;
-        if (actualDamage < 0) actualDamage = 0;
+        if (actualDamage < 0)
+            actualDamage = 0;
         reduceHealth(actualDamage);
     }
 
     @Override
     public String toString() {
         if (getCurrentHealth() == 0)
-            return getName() + " has been beaten, even with its " + shield + " shield. So bad, it could heal " + healCapacity + " HP.";
-        return getName() + " is a strong Templar with " + getCurrentHealth() + " HP. It can heal " + healCapacity + " HP and has a shield of " + shield + ".";
+            return getName() + " has been beaten, even with its " + shield + " shield. So bad, it could heal "
+                    + healCapacity + " HP.";
+        return getName() + " is a strong Templar with " + getCurrentHealth() + " HP. It can heal " + healCapacity
+                + " HP and has a shield of " + shield + ".";
     }
 }
