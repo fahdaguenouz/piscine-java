@@ -6,6 +6,8 @@ public class Monster extends Character {
 
     @Override
     public void attack(Character target) throws DeadCharacterException {
+        if (getCurrentHealth() == 0) {
+            throw new DeadCharacterException(this); 
         int damage = getWeapon() != null ? getWeapon().getDamage() : 7;
         target.takeDamage(damage);
     }
