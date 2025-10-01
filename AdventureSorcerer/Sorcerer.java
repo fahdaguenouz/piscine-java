@@ -21,6 +21,6 @@ public class Sorcerer extends Character implements Healer {
         if (getCurrentHealth() == 0) {
             return getName() + " is a dead sorcerer. So bad, it could heal " + healCapacity + " HP.";
         }
-        return getName() + " is a sorcerer with " + getCurrentHealth() + " HP. It can heal " + healCapacity + " HP.";
+        return getName() + " is a sorcerer with " + getCurrentHealth() + " HP. It can heal " + healCapacity + " HP.";xz
     }
 }
