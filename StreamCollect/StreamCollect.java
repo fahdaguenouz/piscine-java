@@ -10,7 +10,6 @@ public class StreamCollect {
                         str -> Character.toUpperCase(str.charAt(0))
                 ));
     }
-
     public static Map<Integer, Optional<Integer>> getMaxByModulo4(Stream<Integer> s) {
         return s.collect(Collectors.groupingBy(
                 num -> num % 4,
