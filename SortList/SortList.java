@@ -16,7 +16,6 @@ public class SortList {
 
     public static List<Integer> sortReverse(List<Integer> list) {
         if (list == null) return null;
-
         List<Integer> sorted = new ArrayList<>(list); 
         sorted.sort(Comparator.reverseOrder()); 
         return sorted;
