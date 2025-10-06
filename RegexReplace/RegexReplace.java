@@ -19,16 +19,13 @@ public static String obfuscateEmail(String s) {
 
     // --- Username obfuscation ---
     if (username.matches(".*[._-].*")) {
-        // Hide everything after the first special character
+        // Hide everything after first special character
         int first = username.indexOf('.');
         if (username.indexOf('_') >= 0 && username.indexOf('_') < first) first = username.indexOf('_');
         if (username.indexOf('-') >= 0 && username.indexOf('-') < first) first = username.indexOf('-');
         username = username.substring(0, first + 1) + "***";
-    } else if (username.length() > 3) {
-        // Keep first 3 chars, hide the rest
-        username = username.substring(0, 3) + "***";
     } else if (username.length() > 1) {
-        // Hide last char if length <= 3
+        // Hide only the last character
         username = username.substring(0, username.length() - 1) + "*";
     } else {
         username = "*";
@@ -51,6 +48,7 @@ public static String obfuscateEmail(String s) {
 
     return username + "@" + domain;
 }
+
 
 
 
