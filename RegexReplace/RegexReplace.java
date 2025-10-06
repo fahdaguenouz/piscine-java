@@ -1,56 +1,94 @@
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegexReplace {
-
     public static String removeUnits(String s) {
-        if (s == null) {
-            return null;
+        Pattern pattern = Pattern.compile("(\\d+)(cm|€)(?=\\s|$)");
+        Matcher matcher = pattern.matcher(s);
+        String replaced = matcher.replaceAll("$1");
+        return replaced;
+    }
+    
+ public static String obfuscateEmail(String s) {
+        // Split username and domain
+        String[] parts = s.split("@");
+        if (parts.length != 2) {
+            return s;  // invalid email format, return as is
         }
-        return s.replaceAll("(\\d+)(cm|€)(?!\\S)", "$1");
-    }
-public static String obfuscateEmail(String s) {
-    if (s == null) return null;
+        String username = parts[0];
+        String domain = parts[1];
 
-    String[] parts = s.split("@");
-    if (parts.length != 2) return s; // invalid email
+        // Obfuscate username
+        username = obfuscateUsername(username);
 
-    String username = parts[0];
-    String domain = parts[1];
+        // Obfuscate domain
+        domain = obfuscateDomain(domain);
 
-    // --- Username obfuscation ---
-    if (username.matches(".*[._-].*")) {
-        // Hide everything after first special character
-        int first = username.indexOf('.');
-        if (first < 0 || (username.indexOf('_') >= 0 && username.indexOf('_') < first)) first = username.indexOf('_');
-        if (first < 0 || (username.indexOf('-') >= 0 && username.indexOf('-') < first)) first = username.indexOf('-');
-        username = username.substring(0, first + 1) + "***";
-    } else if (username.length() >= 3) {
-        // Keep first 3 characters and append ***
-        username = username.substring(0, 3) + "***";
-    } else {
-        // For short usernames, replace with *
-        username = "*";
+        return username + "@" + domain;
     }
 
-    // --- Domain obfuscation ---
-    String[] domainParts = domain.split("\\.");
-    if (domainParts.length == 3) {
-        // third.second.top -> hide third and top
-        domain = "*******." + domainParts[1] + ".***";
-    } else if (domainParts.length == 2) {
-        // second.top -> hide second and top if top not com/org/net
-        String top = domainParts[1];
-        if (top.equals("com") || top.equals("org") || top.equals("net")) {
-            domain = "*******." + top;
+    private static String obfuscateUsername(String username) {
+        boolean checkFlag = false;
+        // If username contains '-', '.', or '_'
+        if (username.matches(".*[-._].*")) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < username.length(); i++) {
+                char c = username.charAt(i);
+                if (c == '-' || c == '.' || c == '_') {
+                    sb.append(c);
+                    checkFlag = true;
+                } else if (checkFlag) {
+                    sb.append('*');
+                } else {
+                    sb.append(c);
+                }
+
+            }
+            return sb.toString();
         } else {
-            domain = "*******." + "***";
+            if (username.length() > 3) {
+                return username.substring(0,3) + "*".repeat(username.length() - 3);
+            }
+            return username;
         }
     }
 
-    return username + "@" + domain;
-}
+    private static String obfuscateDomain(String domain) {
+        String[] domainParts = domain.split("\\.");
+        int n = domainParts.length;
 
+        // Helper to check if TLD is .com, .org, .net
+        boolean isCommonTLD = false;
+        if (n >= 1) {
+            String tld = domainParts[n - 1].toLowerCase();
+            isCommonTLD = tld.equals("com") || tld.equals("org") || tld.equals("net");
+        }
 
+        if (n == 3) {
+            // third level domain (a.b.c)
+            // hide first and last parts
+            domainParts[0] = maskString(domainParts[0]);
+            domainParts[2] = maskString(domainParts[2]);
+        } else if (n == 2) {
+            // second level domain only
+            // Always hide the second level domain (first part)
+            domainParts[0] = maskString(domainParts[0]);
+            // Hide TLD only if it's NOT .com/.org/.net
+            if (!isCommonTLD) {
+                domainParts[1] = maskString(domainParts[1]);
+            }
+        } else {
+            // other cases - hide all but keep dots (just in case)
+            for (int i = 0; i < n; i++) {
+                domainParts[i] = maskString(domainParts[i]);
+            }
+        }
 
+        return String.join(".", domainParts);
+    }
 
+    private static String maskString(String s) {
+        // Return a string of '*' of same length as s
+        return "*".repeat(s.length());
+    }
 }
