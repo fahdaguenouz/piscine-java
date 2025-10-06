@@ -10,10 +10,13 @@ public class ParseDate {
        return LocalDateTime.parse(stringDate);
     }
 
-    public static LocalDate parseFullTextFormat(String stringDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d MMMM yyyy", Locale.ENGLISH);
-        return LocalDate.parse(stringDate.toLowerCase(), formatter);
+ public static LocalDate parseFullTextFormat(String stringDate) {
+    if (stringDate == null) {
+        return null; // Handle null input gracefully
     }
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d MMMM yyyy", Locale.ENGLISH);
+    return LocalDate.parse(stringDate.toLowerCase(), formatter);
+}
 
      public static LocalTime parseTimeFormat(String stringDate) {
     if (stringDate == null) {
