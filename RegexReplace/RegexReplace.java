@@ -24,11 +24,8 @@ public static String obfuscateEmail(String s) {
         if (username.indexOf('_') >= 0 && username.indexOf('_') < first) first = username.indexOf('_');
         if (username.indexOf('-') >= 0 && username.indexOf('-') < first) first = username.indexOf('-');
         username = username.substring(0, first + 1) + "***";
-    } else if (username.length() > 3) {
-        // Hide last 3 characters
-        username = username.substring(0, username.length() - 3) + "***";
     } else if (username.length() > 1) {
-        // Hide last character
+        // Hide only the last character
         username = username.substring(0, username.length() - 1) + "*";
     } else {
         username = "*";
