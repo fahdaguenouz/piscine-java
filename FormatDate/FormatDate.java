@@ -11,13 +11,19 @@ public class FormatDate {
         return "Le " + dateTime.format(formatter);
     }
 
-    public static String formatSimple(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d yy", Locale.ITALIAN);
-        return date.format(formatter);
+   public static String formatSimple(LocalDate date) {
+    if (date == null) {
+        return null; 
     }
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d yy", Locale.ITALIAN);
+    return date.format(formatter);
+}
 
-    public static String formatIso(LocalTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSSSSSSSS");
-        return time.format(formatter);
+public static String formatIso(LocalTime time) {
+    if (time == null) {
+        return null;
     }
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSSSSSSSS");
+    return time.format(formatter);
+}
 }
