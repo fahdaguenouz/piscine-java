@@ -14,6 +14,7 @@ public class RegexReplace {
             return null; 
         }
 
+        
         // Split email into username and domain
         String[] parts = s.split("@");
         if (parts.length != 2) {
