@@ -9,7 +9,7 @@ public class RegexReplace {
         return s.replaceAll("(\\d+)(cm|€)(?!\\S)", "$1");
     }
 
-  public static String obfuscateEmail(String s) {
+public static String obfuscateEmail(String s) {
     if (s == null) return null;
 
     String[] parts = s.split("@");
@@ -18,34 +18,24 @@ public class RegexReplace {
     String username = parts[0];
     String domain = parts[1];
 
-    // Obfuscate username
-    if (username.matches(".*[-._].*")) {
-        int first = Math.min(
-            username.indexOf('.') >= 0 ? username.indexOf('.') : Integer.MAX_VALUE,
-            Math.min(
-                username.indexOf('-') >= 0 ? username.indexOf('-') : Integer.MAX_VALUE,
-                username.indexOf('_') >= 0 ? username.indexOf('_') : Integer.MAX_VALUE
-            )
-        );
-        username = username.substring(0, first + 1) + "***";
-    } else if (username.length() > 3) {
-        username = username.substring(0, username.length() - 3) + "***";
+    // --- Username ---
+    if (username.length() > 1) {
+        username = username.substring(0, username.length() - 1) + "*";
+    } else {
+        username = "*";
     }
 
-    // Obfuscate domain
+    // --- Domain ---
     if (domain.matches("\\w+\\.\\w+\\.\\w+")) {
-        domain = domain.replaceAll("^(\\w+)\\.(\\w+)\\.(\\w+)$", "*******.$2.*******");
+        // three parts
+        domain = domain.replaceAll("^(\\w+)\\.(\\w+)\\.(\\w+)$", "*******.$2.***");
     } else if (domain.matches("\\w+\\.\\w+")) {
-        if (!domain.matches("\\w+\\.(com|org|net)")) {
-            domain = domain.replaceAll("^(\\w+)\\.(\\w+)$", "*******.**");
-        } else {
-            domain = domain.replaceAll("^(\\w+)\\.(\\w+)$", "*******.$2");
-        }
+        // two parts
+        domain = domain.replaceAll("^(\\w+)\\.(\\w+)$", "*******.***");
     }
 
     return username + "@" + domain;
 }
-
 
 
 }
