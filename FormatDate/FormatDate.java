@@ -6,6 +6,9 @@ import java.util.Locale;
 public class FormatDate {
 
     public static String formatToFullText(LocalDateTime dateTime) {
+       if (dateTime == null) {
+        return null; 
+    }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
             "d MMMM 'de l''an' yyyy 'à' HH'h'mm'm et 'ss's'", Locale.FRENCH);
         return "Le " + dateTime.format(formatter);
