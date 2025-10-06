@@ -6,7 +6,7 @@ public class RegexReplace {
         if (s == null) {
             return null; 
         }
-          return s.replaceAll("\\b(\\d+)(cm|€)(?![²])\\s?", "$1");
+return s.replaceAll("\\b(\\d+)(cm|€)\\b", "$1 et demi");
     }
 
     public static String obfuscateEmail(String s) {
