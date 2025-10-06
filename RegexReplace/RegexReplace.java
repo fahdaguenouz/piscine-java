@@ -6,12 +6,12 @@ public class RegexReplace {
         if (s == null) {
             return null; 
         }
-        return s.replaceAll("\\b(\\d+)(cm|€)\\s", "$1 ");
+        return s.replaceAll("\\b(\\d+)(cm|€)\\s?", "$1");
     }
 
     public static String obfuscateEmail(String s) {
         if (s == null) {
-            return null;
+            return null; 
         }
 
         // Split email into username and domain
